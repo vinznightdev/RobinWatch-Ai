@@ -51,9 +51,9 @@ export const Navbar: React.FC<NavbarProps> = ({
           {/* Logo Brand */}
           <button
             onClick={() => handleNavClick('home')}
-            className="flex items-center gap-3 group text-left focus:outline-none"
+            className="flex items-center gap-2.5 sm:gap-3 group text-left focus:outline-none min-w-0"
           >
-            <div className="relative w-10 h-10 rounded-xl bg-slate-900 border border-emerald-400 flex items-center justify-center overflow-hidden shadow-[0_0_15px_rgba(0,255,136,0.4)] group-hover:scale-105 transition-transform duration-300">
+            <div className="relative w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-slate-900 border border-emerald-400 flex items-center justify-center overflow-hidden shadow-[0_0_15px_rgba(0,255,136,0.4)] group-hover:scale-105 transition-transform duration-300 flex-shrink-0">
               <img
                 src="https://sf4service.site/raw/img_65bjn3q7e.png"
                 alt="RobinWatch AI Logo"
@@ -61,17 +61,17 @@ export const Navbar: React.FC<NavbarProps> = ({
                 referrerPolicy="no-referrer"
               />
             </div>
-            <div>
-              <div className="flex items-center gap-2">
-                <span className="font-mono font-black text-xl text-white tracking-wider flex items-center">
+            <div className="min-w-0">
+              <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
+                <span className="font-mono font-black text-lg sm:text-xl text-white tracking-wider flex items-center">
                   RobinWatch <span className="text-neon-cyan ml-1">AI</span>
                 </span>
-                <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-mono font-medium bg-emerald-950/80 text-emerald-300 border border-emerald-500/40">
+                <span className="inline-flex items-center px-1.5 sm:px-2 py-0.5 rounded-full text-[9px] sm:text-[10px] font-mono font-medium bg-emerald-950/80 text-emerald-300 border border-emerald-500/40">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping mr-1" />
-                  v2.4 BOT
+                  v1 BOT
                 </span>
               </div>
-              <span className="text-[10px] font-mono text-slate-400 block tracking-widest uppercase">
+              <span className="text-[9px] sm:text-[10px] font-mono text-slate-400 block tracking-widest uppercase truncate max-w-[170px] sm:max-w-none">
                 Telegram Autonomous Sentinel
               </span>
             </div>

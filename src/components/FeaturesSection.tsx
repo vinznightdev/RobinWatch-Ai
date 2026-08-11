@@ -252,7 +252,7 @@ export const FeaturesSection: React.FC<FeaturesSectionProps> = ({ onOpenBotModal
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.9 }}
-              className="w-full max-w-2xl bg-slate-900 border-2 border-emerald-400 rounded-3xl p-6 sm:p-8 shadow-[0_0_50px_rgba(0,255,136,0.4)] relative wire-border-cyan overflow-hidden"
+              className="w-full max-w-2xl bg-slate-900 border-2 border-emerald-400 rounded-3xl p-5 sm:p-8 shadow-[0_0_50px_rgba(0,255,136,0.4)] relative wire-border-cyan overflow-hidden max-h-[90vh] overflow-y-auto"
             >
               {/* Top Bar */}
               <div className="flex items-center justify-between mb-6 pb-4 border-b border-slate-800">

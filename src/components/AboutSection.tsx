@@ -135,40 +135,40 @@ export const AboutSection: React.FC = () => {
         </div>
 
         {/* TAB SELECTOR */}
-        <div className="flex justify-center mb-10">
-          <div className="inline-flex p-1.5 rounded-2xl bg-slate-900 border border-emerald-500/30 font-mono text-xs">
+        <div className="flex justify-center mb-10 px-2">
+          <div className="inline-flex flex-wrap sm:flex-nowrap justify-center gap-1 p-1.5 rounded-2xl bg-slate-900 border border-emerald-500/30 font-mono text-xs max-w-full">
             <button
               onClick={() => setActiveTab('architecture')}
-              className={`px-5 py-2.5 rounded-xl transition-all duration-300 flex items-center gap-2 ${
+              className={`px-3 sm:px-5 py-2 sm:py-2.5 rounded-xl transition-all duration-300 flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-xs ${
                 activeTab === 'architecture'
                   ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-400 shadow-[0_0_15px_rgba(0,255,136,0.3)]'
                   : 'text-slate-400 hover:text-slate-200'
               }`}
             >
-              <Cpu className="w-4 h-4" />
+              <Cpu className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" />
               <span>System Architecture</span>
             </button>
             <button
               onClick={() => setActiveTab('datasources')}
-              className={`px-5 py-2.5 rounded-xl transition-all duration-300 flex items-center gap-2 ${
+              className={`px-3 sm:px-5 py-2 sm:py-2.5 rounded-xl transition-all duration-300 flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-xs ${
                 activeTab === 'datasources'
                   ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-400 shadow-[0_0_15px_rgba(0,255,136,0.3)]'
                   : 'text-slate-400 hover:text-slate-200'
               }`}
             >
-              <Database className="w-4 h-4" />
-              <span>Data Sources (RPC & APIs)</span>
+              <Database className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" />
+              <span>Data Sources</span>
             </button>
             <button
               onClick={() => setActiveTab('risk')}
-              className={`px-5 py-2.5 rounded-xl transition-all duration-300 flex items-center gap-2 ${
+              className={`px-3 sm:px-5 py-2 sm:py-2.5 rounded-xl transition-all duration-300 flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-xs ${
                 activeTab === 'risk'
                   ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-400 shadow-[0_0_15px_rgba(0,255,136,0.3)]'
                   : 'text-slate-400 hover:text-slate-200'
               }`}
             >
-              <Shield className="w-4 h-4" />
-              <span>Deployer Tracing & Risk Engine</span>
+              <Shield className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" />
+              <span>Risk Engine</span>
             </button>
           </div>
         </div>

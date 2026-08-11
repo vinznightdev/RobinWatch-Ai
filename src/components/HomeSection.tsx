@@ -276,12 +276,12 @@ export const HomeSection: React.FC<HomeSectionProps> = ({
             </div>
 
             {/* Token Selector Pills */}
-            <div className="flex items-center gap-2 flex-wrap">
+            <div className="flex items-center gap-2 overflow-x-auto pb-2 sm:pb-0 w-full md:w-auto scrollbar-none">
               {sampleTokens.map((token) => (
                 <button
                   key={token.symbol}
                   onClick={() => setSelectedToken(token)}
-                  className={`px-3.5 py-1.5 rounded-xl font-mono text-xs font-bold flex items-center gap-2 transition-all duration-200 ${
+                  className={`px-3 py-1.5 rounded-xl font-mono text-xs font-bold flex items-center gap-2 transition-all duration-200 flex-shrink-0 ${
                     selectedToken.symbol === token.symbol
                       ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-400 shadow-[0_0_15px_rgba(0,255,136,0.3)]'
                       : 'bg-slate-900 text-slate-400 border border-slate-800 hover:text-slate-200'
@@ -323,12 +323,12 @@ export const HomeSection: React.FC<HomeSectionProps> = ({
                 </span>
               </div>
 
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
-                <div className="bg-slate-950 p-3 rounded-xl border border-slate-800">
-                  <span className="text-[10px] text-slate-400 block">PRICE (USD)</span>
-                  <span className="text-sm font-bold text-emerald-400">${selectedToken.priceUsd}</span>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3 pt-2">
+                <div className="bg-slate-950 p-2.5 sm:p-3 rounded-xl border border-slate-800 min-w-0">
+                  <span className="text-[9px] sm:text-[10px] text-slate-400 block truncate">PRICE (USD)</span>
+                  <span className="text-xs sm:text-sm font-bold text-emerald-400 block truncate">${selectedToken.priceUsd}</span>
                   <span
-                    className={`text-[10px] block font-bold ${
+                    className={`text-[9px] sm:text-[10px] block font-bold ${
                       selectedToken.priceChange24h >= 0 ? 'text-emerald-400' : 'text-red-400'
                     }`}
                   >
@@ -337,28 +337,28 @@ export const HomeSection: React.FC<HomeSectionProps> = ({
                   </span>
                 </div>
 
-                <div className="bg-slate-950 p-3 rounded-xl border border-slate-800">
-                  <span className="text-[10px] text-slate-400 block">FDV / MARKET CAP</span>
-                  <span className="text-sm font-bold text-white">
+                <div className="bg-slate-950 p-2.5 sm:p-3 rounded-xl border border-slate-800 min-w-0">
+                  <span className="text-[9px] sm:text-[10px] text-slate-400 block truncate">FDV / MARKET CAP</span>
+                  <span className="text-xs sm:text-sm font-bold text-white block truncate">
                     ${(selectedToken.fdv / 1000000).toFixed(2)}M
                   </span>
-                  <span className="text-[10px] text-slate-500 block">DexScreener Feed</span>
+                  <span className="text-[9px] sm:text-[10px] text-slate-500 block truncate">DexScreener Feed</span>
                 </div>
 
-                <div className="bg-slate-950 p-3 rounded-xl border border-slate-800">
-                  <span className="text-[10px] text-slate-400 block">POOLED LIQUIDITY</span>
-                  <span className="text-sm font-bold text-emerald-400">
+                <div className="bg-slate-950 p-2.5 sm:p-3 rounded-xl border border-slate-800 min-w-0">
+                  <span className="text-[9px] sm:text-[10px] text-slate-400 block truncate">POOLED LIQUIDITY</span>
+                  <span className="text-xs sm:text-sm font-bold text-emerald-400 block truncate">
                     ${(selectedToken.liquidityUsd / 1000).toFixed(0)}k
                   </span>
-                  <span className="text-[10px] text-slate-500 block">DEX Locked</span>
+                  <span className="text-[9px] sm:text-[10px] text-slate-500 block truncate">DEX Locked</span>
                 </div>
 
-                <div className="bg-slate-950 p-3 rounded-xl border border-slate-800">
-                  <span className="text-[10px] text-slate-400 block">24H VOLUME</span>
-                  <span className="text-sm font-bold text-purple-400">
+                <div className="bg-slate-950 p-2.5 sm:p-3 rounded-xl border border-slate-800 min-w-0">
+                  <span className="text-[9px] sm:text-[10px] text-slate-400 block truncate">24H VOLUME</span>
+                  <span className="text-xs sm:text-sm font-bold text-purple-400 block truncate">
                     ${(selectedToken.volume24h / 1000000).toFixed(2)}M
                   </span>
-                  <span className="text-[10px] text-slate-500 block">
+                  <span className="text-[9px] sm:text-[10px] text-slate-500 block truncate">
                     {selectedToken.buys24h}B / {selectedToken.sells24h}S
                   </span>
                 </div>
