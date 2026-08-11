@@ -1,0 +1,184 @@
+@import "tailwindcss";
+
+@layer utilities {
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+  .perspective-2000 {
+    perspective: 2000px;
+  }
+  .transform-style-3d {
+    transform-style: preserve-3d;
+  }
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+}
+
+/* Custom High-Tech Cyber Aesthetic Styles */
+:root {
+  --color-neon-cyan: #00ff88;
+  --color-neon-purple: #9d00ff;
+  --color-neon-emerald: #00ff88;
+  --color-cyber-dark: #070a12;
+  --color-cyber-card: #0d1322;
+}
+
+body {
+  background-color: var(--color-cyber-dark);
+  color: #e2e8f0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Glowing Wires Keyframes */
+@keyframes wirePulse {
+  0% {
+    stroke-dashoffset: 1000;
+    filter: drop-shadow(0 0 2px #00ff88) drop-shadow(0 0 8px #00ff88);
+  }
+  50% {
+    filter: drop-shadow(0 0 6px #00ff88) drop-shadow(0 0 16px #00ff88);
+  }
+  100% {
+    stroke-dashoffset: 0;
+    filter: drop-shadow(0 0 2px #00ff88) drop-shadow(0 0 8px #00ff88);
+  }
+}
+
+@keyframes wireGlowPurple {
+  0%, 100% {
+    filter: drop-shadow(0 0 4px #9d00ff) drop-shadow(0 0 10px #9d00ff);
+  }
+  50% {
+    filter: drop-shadow(0 0 10px #9d00ff) drop-shadow(0 0 20px #9d00ff);
+  }
+}
+
+@keyframes box3DFloat {
+  0%, 100% {
+    transform: translateY(0px) rotateX(4deg) rotateY(-4deg);
+  }
+  50% {
+    transform: translateY(-12px) rotateX(-4deg) rotateY(6deg);
+  }
+}
+
+@keyframes scanline {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(1000%);
+  }
+}
+
+@keyframes borderGlowRun {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Glowing Electric Wire Utility Classes */
+.wire-border-cyan {
+  position: relative;
+  border: 1px solid rgba(0, 255, 136, 0.3);
+  box-shadow: 0 0 15px rgba(0, 255, 136, 0.15), inset 0 0 15px rgba(0, 255, 136, 0.05);
+  transition: all 0.3s ease;
+}
+
+.wire-border-cyan:hover {
+  border-color: rgba(0, 255, 136, 0.8);
+  box-shadow: 0 0 25px rgba(0, 255, 136, 0.4), inset 0 0 20px rgba(0, 255, 136, 0.15);
+}
+
+.wire-border-purple {
+  position: relative;
+  border: 1px solid rgba(157, 0, 255, 0.3);
+  box-shadow: 0 0 15px rgba(157, 0, 255, 0.15), inset 0 0 15px rgba(157, 0, 255, 0.05);
+  transition: all 0.3s ease;
+}
+
+.wire-border-purple:hover {
+  border-color: rgba(157, 0, 255, 0.8);
+  box-shadow: 0 0 25px rgba(157, 0, 255, 0.4), inset 0 0 20px rgba(157, 0, 255, 0.15);
+}
+
+.wire-border-emerald {
+  position: relative;
+  border: 1px solid rgba(0, 255, 136, 0.3);
+  box-shadow: 0 0 15px rgba(0, 255, 136, 0.15), inset 0 0 15px rgba(0, 255, 136, 0.05);
+  transition: all 0.3s ease;
+}
+
+.wire-border-emerald:hover {
+  border-color: rgba(0, 255, 136, 0.8);
+  box-shadow: 0 0 25px rgba(0, 255, 136, 0.4), inset 0 0 20px rgba(0, 255, 136, 0.15);
+}
+
+/* Glowing Neon Text */
+.text-neon-cyan {
+  color: #00ff88;
+  text-shadow: 0 0 8px rgba(0, 255, 136, 0.6), 0 0 20px rgba(0, 255, 136, 0.3);
+}
+
+.text-neon-purple {
+  color: #c084fc;
+  text-shadow: 0 0 8px rgba(192, 132, 252, 0.6), 0 0 20px rgba(157, 0, 255, 0.3);
+}
+
+.text-neon-emerald {
+  color: #00ff88;
+  text-shadow: 0 0 8px rgba(0, 255, 136, 0.6), 0 0 20px rgba(0, 255, 136, 0.3);
+}
+
+/* Background Cyber Grid */
+.cyber-grid {
+  background-image: 
+    linear-gradient(to right, rgba(0, 255, 136, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 255, 136, 0.05) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+.cyber-grid-dense {
+  background-image: 
+    linear-gradient(to right, rgba(157, 0, 255, 0.07) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(157, 0, 255, 0.07) 1px, transparent 1px);
+  background-size: 16px 16px;
+}
+
+/* 3D Box Styling */
+.box-3d-wrapper {
+  perspective: 1200px;
+}
+
+.box-3d-card {
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.animate-float-3d {
+  animation: box3DFloat 6s ease-in-out infinite;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #070a12;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 4px;
+  border: 1px solid rgba(0, 255, 136, 0.2);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #00ff88;
+}
