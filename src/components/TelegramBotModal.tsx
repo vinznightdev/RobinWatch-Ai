@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { Send, X, Check, Copy, Bot, Shield, Sparkles, ExternalLink } from 'lucide-react';
 
@@ -24,14 +25,16 @@ export const TelegramBotModal: React.FC<TelegramBotModalProps> = ({ isOpen, onCl
     setPairingCode(randomCode);
   };
 
-  return (
+  if (typeof document === 'undefined') return null;
+
+  return createPortal(
     <AnimatePresence>
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md">
+      <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-slate-950/95 backdrop-blur-xl overflow-y-auto">
         <motion.div
           initial={{ opacity: 0, scale: 0.95, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 20 }}
-          className="w-full max-w-lg bg-slate-900 border-2 border-emerald-400 rounded-3xl p-5 sm:p-8 shadow-[0_0_50px_rgba(0,255,136,0.4)] relative wire-border-cyan overflow-hidden max-h-[90vh] overflow-y-auto"
+          className="w-full max-w-lg bg-slate-900 border-2 border-emerald-400 rounded-3xl p-5 sm:p-8 shadow-[0_0_50px_rgba(0,255,136,0.4)] relative wire-border-cyan overflow-hidden my-auto max-h-[90vh] overflow-y-auto"
         >
           {/* Top Bar */}
           <div className="flex items-center justify-between mb-6 pb-4 border-b border-slate-800">
@@ -117,6 +120,7 @@ export const TelegramBotModal: React.FC<TelegramBotModalProps> = ({ isOpen, onCl
           </div>
         </motion.div>
       </div>
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body
   );
 };

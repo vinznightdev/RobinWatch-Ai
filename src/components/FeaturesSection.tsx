@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { FeatureItem } from '../types';
 import {
@@ -245,79 +246,83 @@ export const FeaturesSection: React.FC<FeaturesSectionProps> = ({ onOpenBotModal
       </div>
 
       {/* FEATURE DETAIL MODAL */}
-      <AnimatePresence>
-        {selectedFeature && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.9 }}
-              className="w-full max-w-2xl bg-slate-900 border-2 border-emerald-400 rounded-3xl p-5 sm:p-8 shadow-[0_0_50px_rgba(0,255,136,0.4)] relative wire-border-cyan overflow-hidden max-h-[90vh] overflow-y-auto"
-            >
-              {/* Top Bar */}
-              <div className="flex items-center justify-between mb-6 pb-4 border-b border-slate-800">
-                <div className="flex items-center gap-3">
-                  <div className="p-3 rounded-xl bg-slate-950 border border-emerald-400 text-emerald-400">
-                    {React.createElement(getIcon(selectedFeature.iconName), { className: 'w-6 h-6' })}
+      {typeof document !== 'undefined' &&
+        createPortal(
+          <AnimatePresence>
+            {selectedFeature && (
+              <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-slate-950/95 backdrop-blur-xl overflow-y-auto">
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.9 }}
+                  className="w-full max-w-2xl bg-slate-900 border-2 border-emerald-400 rounded-3xl p-5 sm:p-8 shadow-[0_0_50px_rgba(0,255,136,0.4)] relative wire-border-cyan overflow-hidden my-auto max-h-[90vh] overflow-y-auto"
+                >
+                  {/* Top Bar */}
+                  <div className="flex items-center justify-between mb-6 pb-4 border-b border-slate-800">
+                    <div className="flex items-center gap-3">
+                      <div className="p-3 rounded-xl bg-slate-950 border border-emerald-400 text-emerald-400">
+                        {React.createElement(getIcon(selectedFeature.iconName), { className: 'w-6 h-6' })}
+                      </div>
+                      <div>
+                        <span className="text-[10px] font-mono text-emerald-400 block tracking-widest uppercase">
+                          ROBINHOOD CHAIN SENTINEL // {selectedFeature.techTag}
+                        </span>
+                        <h3 className="text-xl font-mono font-bold text-white">{selectedFeature.title}</h3>
+                      </div>
+                    </div>
+
+                    <button
+                      onClick={() => setSelectedFeature(null)}
+                      className="p-2 rounded-xl bg-slate-950 text-slate-400 hover:text-white border border-slate-800 hover:border-emerald-400 transition-colors"
+                    >
+                      <X className="w-5 h-5" />
+                    </button>
                   </div>
-                  <div>
-                    <span className="text-[10px] font-mono text-emerald-400 block tracking-widest uppercase">
-                      ROBINHOOD CHAIN SENTINEL // {selectedFeature.techTag}
+
+                  {/* Description */}
+                  <p className="text-sm text-slate-200 leading-relaxed font-sans mb-6">
+                    {selectedFeature.fullDesc}
+                  </p>
+
+                  {/* Specification Checklist */}
+                  <div className="space-y-2 mb-8 bg-slate-950 p-4 rounded-2xl border border-slate-800">
+                    <span className="text-xs font-mono text-emerald-300 block mb-2 font-semibold">
+                      TECHNICAL SPECIFICATIONS:
                     </span>
-                    <h3 className="text-xl font-mono font-bold text-white">{selectedFeature.title}</h3>
+                    {selectedFeature.details.map((detail, dIdx) => (
+                      <div key={dIdx} className="flex items-center gap-2.5 text-xs font-mono text-slate-300">
+                        <CheckCircle className="w-4 h-4 text-emerald-400 flex-shrink-0" />
+                        <span>{detail}</span>
+                      </div>
+                    ))}
                   </div>
-                </div>
 
-                <button
-                  onClick={() => setSelectedFeature(null)}
-                  className="p-2 rounded-xl bg-slate-950 text-slate-400 hover:text-white border border-slate-800 hover:border-emerald-400 transition-colors"
-                >
-                  <X className="w-5 h-5" />
-                </button>
-              </div>
+                  {/* Modal Action CTA */}
+                  <div className="flex items-center justify-end gap-3">
+                    <button
+                      onClick={() => setSelectedFeature(null)}
+                      className="px-5 py-2.5 rounded-xl font-mono text-xs text-slate-300 hover:bg-slate-800 border border-slate-800"
+                    >
+                      Close Inspector
+                    </button>
 
-              {/* Description */}
-              <p className="text-sm text-slate-200 leading-relaxed font-sans mb-6">
-                {selectedFeature.fullDesc}
-              </p>
-
-              {/* Specification Checklist */}
-              <div className="space-y-2 mb-8 bg-slate-950 p-4 rounded-2xl border border-slate-800">
-                <span className="text-xs font-mono text-emerald-300 block mb-2 font-semibold">
-                  TECHNICAL SPECIFICATIONS:
-                </span>
-                {selectedFeature.details.map((detail, dIdx) => (
-                  <div key={dIdx} className="flex items-center gap-2.5 text-xs font-mono text-slate-300">
-                    <CheckCircle className="w-4 h-4 text-emerald-400 flex-shrink-0" />
-                    <span>{detail}</span>
+                    <button
+                      onClick={() => {
+                        setSelectedFeature(null);
+                        onOpenBotModal();
+                      }}
+                      className="px-6 py-2.5 rounded-xl font-mono text-xs font-bold bg-emerald-400 text-slate-950 shadow-[0_0_20px_rgba(0,255,136,0.4)] hover:bg-emerald-300 transition-all flex items-center gap-2"
+                    >
+                      <Bot className="w-4 h-4" />
+                      <span>Test in Telegram</span>
+                    </button>
                   </div>
-                ))}
+                </motion.div>
               </div>
-
-              {/* Modal Action CTA */}
-              <div className="flex items-center justify-end gap-3">
-                <button
-                  onClick={() => setSelectedFeature(null)}
-                  className="px-5 py-2.5 rounded-xl font-mono text-xs text-slate-300 hover:bg-slate-800 border border-slate-800"
-                >
-                  Close Inspector
-                </button>
-
-                <button
-                  onClick={() => {
-                    setSelectedFeature(null);
-                    onOpenBotModal();
-                  }}
-                  className="px-6 py-2.5 rounded-xl font-mono text-xs font-bold bg-emerald-400 text-slate-950 shadow-[0_0_20px_rgba(0,255,136,0.4)] hover:bg-emerald-300 transition-all flex items-center gap-2"
-                >
-                  <Bot className="w-4 h-4" />
-                  <span>Test in Telegram</span>
-                </button>
-              </div>
-            </motion.div>
-          </div>
+            )}
+          </AnimatePresence>,
+          document.body
         )}
-      </AnimatePresence>
     </section>
   );
 };

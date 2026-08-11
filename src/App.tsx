@@ -58,7 +58,7 @@ export default function App() {
       />
 
       {/* Main Content Area - Strictly Home, About, Features, Footer */}
-      <main className="relative z-10">
+      <main className="relative">
         <HomeSection
           onNavigateToFeatures={() => scrollToSection('features')}
           onOpenBotModal={() => setIsBotModalOpen(true)}
