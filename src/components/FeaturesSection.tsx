@@ -152,10 +152,10 @@ export const FeaturesSection: React.FC<FeaturesSectionProps> = ({ onOpenBotModal
   };
 
   return (
-    <section id="features" className="relative py-20 md:py-32 overflow-hidden">
-      {/* Background Decorative Cyber Glows */}
+    <section id="features" className="relative py-20 md:py-32 overflow-hidden section-bg-features">
+      {/* Background Decorative Cyber Grid */}
+      <div className="absolute inset-0 cyber-grid-dense opacity-10 [mask-image:radial-gradient(ellipse_at_center,white,transparent_75%)] pointer-events-none" />
       <div className="absolute top-1/2 left-0 w-[500px] h-[500px] bg-emerald-500/10 rounded-full blur-[160px] pointer-events-none" />
-      <div className="absolute bottom-10 right-0 w-[500px] h-[500px] bg-purple-600/10 rounded-full blur-[160px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* SECTION HEADER */}
@@ -165,7 +165,7 @@ export const FeaturesSection: React.FC<FeaturesSectionProps> = ({ onOpenBotModal
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-purple-950/80 border border-purple-400/40 text-purple-300 text-xs font-mono font-semibold mb-4 shadow-[0_0_15px_rgba(157,0,255,0.2)]"
+            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-purple-950/80 border border-purple-400/40 text-purple-300 text-xs font-mono font-semibold mb-4 shadow-[0_4px_12px_rgba(157,0,255,0.2)]"
           >
             <Sparkles className="w-3.5 h-3.5 text-purple-400" />
             <span>SECTION 03 // CORE CAPABILITIES</span>
@@ -196,6 +196,12 @@ export const FeaturesSection: React.FC<FeaturesSectionProps> = ({ onOpenBotModal
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {features.map((item, index) => {
             const IconComponent = getIcon(item.iconName);
+            const box3DClass = index % 3 === 0 
+              ? 'box-3d-emerald' 
+              : index % 3 === 1 
+              ? 'box-3d-purple' 
+              : 'box-3d-cyber';
+
             return (
               <motion.div
                 key={item.id}
@@ -205,18 +211,17 @@ export const FeaturesSection: React.FC<FeaturesSectionProps> = ({ onOpenBotModal
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 whileHover={{ y: -8 }}
                 onClick={() => setSelectedFeature(item)}
-                className="group cursor-pointer rounded-2xl p-7 bg-slate-950/90 border border-emerald-500/30 shadow-[0_0_20px_rgba(0,0,0,0.4)] hover:shadow-[0_0_35px_rgba(0,255,136,0.25)] transition-all duration-300 relative wire-border-cyan overflow-hidden flex flex-col justify-between"
+                className={`group cursor-pointer rounded-2xl p-7 ${box3DClass} flex flex-col justify-between relative overflow-hidden`}
               >
-                {/* 3D Box Edge Highlights */}
-                <div className="absolute top-0 right-0 w-16 h-16 border-t-2 border-r-2 border-emerald-400/50 rounded-tr-2xl group-hover:border-emerald-300 group-hover:shadow-[0_0_12px_#00ff88] transition-all" />
-                <div className="absolute bottom-0 left-0 w-16 h-16 border-b-2 border-l-2 border-emerald-400/50 rounded-bl-2xl group-hover:border-emerald-300 group-hover:shadow-[0_0_12px_#00ff88] transition-all" />
+                {/* 3D Cyber Light Grid Line Accent */}
+                <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-emerald-400/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
 
                 <div>
                   <div className="flex items-center justify-between mb-6">
-                    <div className="w-12 h-12 rounded-xl bg-slate-900 border border-emerald-400/60 flex items-center justify-center text-emerald-400 group-hover:scale-110 group-hover:shadow-[0_0_15px_rgba(0,255,136,0.5)] transition-all">
+                    <div className="w-12 h-12 rounded-xl bg-slate-950/80 border border-emerald-400/30 flex items-center justify-center text-emerald-400 group-hover:scale-110 group-hover:shadow-[0_0_15px_rgba(0,255,136,0.4)] transition-all">
                       <IconComponent className="w-6 h-6" />
                     </div>
-                    <span className="text-[10px] font-mono px-2.5 py-1 rounded bg-slate-900 text-emerald-300 border border-emerald-500/30">
+                    <span className="text-[10px] font-mono px-2.5 py-1 rounded bg-slate-950 text-emerald-300 border border-emerald-500/20">
                       {item.techTag}
                     </span>
                   </div>
@@ -230,7 +235,7 @@ export const FeaturesSection: React.FC<FeaturesSectionProps> = ({ onOpenBotModal
                 </div>
 
                 {/* Bottom Card Footer */}
-                <div className="pt-4 border-t border-slate-800 flex items-center justify-between text-xs font-mono">
+                <div className="pt-4 border-t border-slate-800/60 flex items-center justify-between text-xs font-mono">
                   <span className="text-slate-400 group-hover:text-emerald-400 transition-colors">
                     {item.metrics}
                   </span>
@@ -245,7 +250,7 @@ export const FeaturesSection: React.FC<FeaturesSectionProps> = ({ onOpenBotModal
         </div>
       </div>
 
-      {/* FEATURE DETAIL MODAL */}
+      {/* FEATURE DETAIL MODAL PORTAL */}
       {typeof document !== 'undefined' &&
         createPortal(
           <AnimatePresence>
@@ -255,12 +260,12 @@ export const FeaturesSection: React.FC<FeaturesSectionProps> = ({ onOpenBotModal
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.9 }}
-                  className="w-full max-w-2xl bg-slate-900 border-2 border-emerald-400 rounded-3xl p-5 sm:p-8 shadow-[0_0_50px_rgba(0,255,136,0.4)] relative wire-border-cyan overflow-hidden my-auto max-h-[90vh] overflow-y-auto"
+                  className="w-full max-w-2xl rounded-3xl p-5 sm:p-8 box-3d-emerald relative overflow-hidden my-auto max-h-[90vh] overflow-y-auto"
                 >
                   {/* Top Bar */}
                   <div className="flex items-center justify-between mb-6 pb-4 border-b border-slate-800">
                     <div className="flex items-center gap-3">
-                      <div className="p-3 rounded-xl bg-slate-950 border border-emerald-400 text-emerald-400">
+                      <div className="p-3 rounded-xl bg-slate-950 border border-emerald-400 text-emerald-400 shadow-[inset_0_1px_0_rgba(255,255,255,0.1)]">
                         {React.createElement(getIcon(selectedFeature.iconName), { className: 'w-6 h-6' })}
                       </div>
                       <div>
@@ -273,7 +278,7 @@ export const FeaturesSection: React.FC<FeaturesSectionProps> = ({ onOpenBotModal
 
                     <button
                       onClick={() => setSelectedFeature(null)}
-                      className="p-2 rounded-xl bg-slate-950 text-slate-400 hover:text-white border border-slate-800 hover:border-emerald-400 transition-colors"
+                      className="p-2 rounded-xl bg-slate-950 text-slate-400 hover:text-white border border-slate-800 hover:border-emerald-400 transition-colors shadow-[0_2px_4px_rgba(0,0,0,0.5)] active:translate-y-[1px]"
                     >
                       <X className="w-5 h-5" />
                     </button>
@@ -284,8 +289,8 @@ export const FeaturesSection: React.FC<FeaturesSectionProps> = ({ onOpenBotModal
                     {selectedFeature.fullDesc}
                   </p>
 
-                  {/* Specification Checklist */}
-                  <div className="space-y-2 mb-8 bg-slate-950 p-4 rounded-2xl border border-slate-800">
+                  {/* Specification Checklist in Recessed 3D Layout */}
+                  <div className="space-y-2 mb-8 bg-slate-950/90 p-4 rounded-2xl border border-slate-900 shadow-[inset_0_2px_4px_rgba(0,0,0,0.6)]">
                     <span className="text-xs font-mono text-emerald-300 block mb-2 font-semibold">
                       TECHNICAL SPECIFICATIONS:
                     </span>
@@ -297,11 +302,11 @@ export const FeaturesSection: React.FC<FeaturesSectionProps> = ({ onOpenBotModal
                     ))}
                   </div>
 
-                  {/* Modal Action CTA */}
+                  {/* Modal Action CTA Buttons */}
                   <div className="flex items-center justify-end gap-3">
                     <button
                       onClick={() => setSelectedFeature(null)}
-                      className="px-5 py-2.5 rounded-xl font-mono text-xs text-slate-300 hover:bg-slate-800 border border-slate-800"
+                      className="px-5 py-2.5 rounded-xl font-mono text-xs text-slate-300 hover:bg-slate-800 border border-slate-800 active:translate-y-[1px] transition-transform"
                     >
                       Close Inspector
                     </button>
@@ -311,7 +316,7 @@ export const FeaturesSection: React.FC<FeaturesSectionProps> = ({ onOpenBotModal
                         setSelectedFeature(null);
                         onOpenBotModal();
                       }}
-                      className="px-6 py-2.5 rounded-xl font-mono text-xs font-bold bg-emerald-400 text-slate-950 shadow-[0_0_20px_rgba(0,255,136,0.4)] hover:bg-emerald-300 transition-all flex items-center gap-2"
+                      className="px-6 py-2.5 rounded-xl font-mono text-xs font-bold box-3d-button-emerald flex items-center gap-2"
                     >
                       <Bot className="w-4 h-4" />
                       <span>Test in Telegram</span>

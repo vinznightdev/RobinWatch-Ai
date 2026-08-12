@@ -28,10 +28,13 @@ interface HomeSectionProps {
   onOpenBotModal: () => void;
 }
 
+const ModelViewer = 'model-viewer' as any;
+
 export const HomeSection: React.FC<HomeSectionProps> = ({
   onNavigateToFeatures,
   onOpenBotModal,
 }) => {
+  const [cameraOrbit, setCameraOrbit] = useState("0deg 75deg 105%");
   // Sample Robinhood Chain Tracked Tokens
   const [sampleTokens] = useState<TrackedToken[]>([
     {
@@ -168,81 +171,170 @@ export const HomeSection: React.FC<HomeSectionProps> = ({
   };
 
   return (
-    <section id="home" className="relative pt-28 pb-16 md:pt-36 md:pb-24 overflow-hidden">
-      {/* Background Decorative Matrix Wires */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-emerald-500/10 rounded-full blur-[140px] pointer-events-none" />
-      <div className="absolute top-1/3 right-10 w-[400px] h-[400px] bg-purple-600/10 rounded-full blur-[120px] pointer-events-none" />
+    <section id="home" className="relative pt-28 pb-16 md:pt-36 md:pb-24 overflow-hidden section-bg-home">
+      {/* 3D Grid Perspective Accents */}
+      <div className="absolute inset-0 cyber-grid-dense opacity-20 [mask-image:radial-gradient(ellipse_at_center,white,transparent_80%)] pointer-events-none" />
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-emerald-500/10 rounded-full blur-[150px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* TOP ROBOT BADGE HEADER */}
-        <div className="flex flex-col items-center text-center mb-10">
+        {/* GRID CONTAINER FOR 3D MODEL AND HERO CONTENT */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center mb-12">
+          {/* LEFT COLUMN: 3D MODEL CHARACTER */}
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900/90 border border-emerald-400/50 shadow-[0_0_20px_rgba(0,255,136,0.25)] mb-6"
+            initial={{ opacity: 0, x: -40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+            className="lg:col-span-5 flex flex-col items-center justify-center relative min-h-[350px] sm:min-h-[420px] w-full"
           >
-            <Sparkles className="w-4 h-4 text-emerald-400 animate-spin" />
-            <span className="text-xs font-mono font-semibold text-emerald-300 tracking-wide uppercase">
-              ROBINHOOD CHAIN TELEGRAM AI SENTINEL
-            </span>
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+            {/* Ambient glows behind the 3D character */}
+            <div className="absolute inset-0 bg-emerald-500/10 rounded-full blur-[80px] pointer-events-none" />
+            <div className="absolute -bottom-4 w-4/5 h-10 bg-emerald-500/20 rounded-full blur-2xl pointer-events-none animate-pulse" />
+            
+            {/* 3D Model Viewer Card Frame */}
+            <div className="w-full h-[350px] sm:h-[420px] rounded-3xl box-3d-emerald p-4 bg-slate-950/40 relative overflow-hidden flex flex-col justify-between">
+              {/* Status Header */}
+              <div className="flex items-center justify-between border-b border-emerald-500/20 pb-3 z-10">
+                <div className="flex items-center gap-2">
+                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping" />
+                  <span className="text-xs font-mono text-emerald-300 font-bold tracking-wider">ROBINWATCH SENTINEL</span>
+                </div>
+                <span className="text-[10px] font-mono bg-emerald-950 text-emerald-300 px-2 py-0.5 rounded border border-emerald-500/30 animate-pulse">
+                  BODY ACTIVE // AUTO-PLAY
+                </span>
+              </div>
+
+              {/* Real Interactive 3D Model Rendering */}
+              <div className="absolute inset-0 top-12 bottom-12 flex items-center justify-center">
+                <ModelViewer
+                  src="/3d_77f9qs1if.glb"
+                  alt="RobinWatch Sentinel AI 3D Model"
+                  camera-controls=""
+                  auto-rotate=""
+                  autoplay=""
+                  ar=""
+                  shadow-intensity="1.5"
+                  exposure="1.2"
+                  interaction-prompt="auto"
+                  camera-orbit={cameraOrbit}
+                  style={{ width: '100%', height: '100%', outline: 'none', background: 'transparent' }}
+                />
+              </div>
+
+              {/* Tactical interactive controls */}
+              <div className="flex flex-col gap-2 z-10 border-t border-emerald-500/20 pt-3">
+                <div className="flex items-center justify-between text-[10px] font-mono text-slate-400">
+                  <span>COMMAND CONSOLE</span>
+                  <span className="text-emerald-400">SELECT BEHAVIORAL INTERACTION</span>
+                </div>
+                <div className="grid grid-cols-3 gap-1.5 font-mono text-[9px]">
+                  <button 
+                    onClick={() => setCameraOrbit("0deg 75deg 105%")}
+                    className={`py-1 rounded border active:translate-y-[1px] transition-all ${
+                      cameraOrbit === "0deg 75deg 105%" 
+                        ? 'bg-emerald-500 text-slate-950 border-emerald-400 font-bold' 
+                        : 'bg-slate-950/80 text-emerald-300 border-emerald-500/20 hover:border-emerald-500/50'
+                    }`}
+                  >
+                    IDLE SCAN
+                  </button>
+                  <button 
+                    onClick={() => setCameraOrbit("45deg 65deg 70%")}
+                    className={`py-1 rounded border active:translate-y-[1px] transition-all ${
+                      cameraOrbit === "45deg 65deg 70%" 
+                        ? 'bg-emerald-500 text-slate-950 border-emerald-400 font-bold' 
+                        : 'bg-slate-950/80 text-emerald-300 border-emerald-500/20 hover:border-emerald-500/50'
+                    }`}
+                  >
+                    TACTICAL FOCUS
+                  </button>
+                  <button 
+                    onClick={() => setCameraOrbit("270deg 85deg 110%")}
+                    className={`py-1 rounded border active:translate-y-[1px] transition-all ${
+                      cameraOrbit === "270deg 85deg 110%" 
+                        ? 'bg-emerald-500 text-slate-950 border-emerald-400 font-bold' 
+                        : 'bg-slate-950/80 text-emerald-300 border-emerald-500/20 hover:border-emerald-500/50'
+                    }`}
+                  >
+                    ORBIT SWEEP
+                  </button>
+                </div>
+              </div>
+            </div>
           </motion.div>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-4xl sm:text-6xl lg:text-7xl font-mono font-black tracking-tight text-white leading-tight max-w-4xl"
-          >
-            RobinWatch <span className="text-neon-cyan inline-block">AI</span>
-            <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-green-300 to-lime-400">
-              Robinhood Chain Token & Wallet Intelligence
-            </span>
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="mt-6 text-base sm:text-lg text-slate-300 max-w-3xl font-sans leading-relaxed"
-          >
-            Track any token deployed on Robinhood Chain with a single Telegram command. Automatically resolve human developer wallets through factory contracts via Blockscout, score 0-100 risk heuristics, stream live DexScreener market metrics, and engage community groups with a witty AI chatter persona.
-          </motion.p>
-
-          {/* Action CTAs */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="mt-8 flex flex-wrap items-center justify-center gap-4"
-          >
-            <button
-              onClick={onOpenBotModal}
-              className="px-8 py-4 rounded-xl font-mono text-sm font-bold bg-gradient-to-r from-emerald-400 via-emerald-500 to-green-600 text-slate-950 shadow-[0_0_30px_rgba(0,255,136,0.5)] hover:shadow-[0_0_45px_rgba(0,255,136,0.8)] hover:scale-105 transition-all duration-300 flex items-center gap-3 border border-emerald-300"
+          {/* RIGHT COLUMN: TEXT CONTENT */}
+          <div className="lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left">
+            {/* TOP ROBOT BADGE HEADER */}
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-950/80 border-t border-l border-emerald-400/40 border-r border-b border-emerald-500/10 shadow-[0_4px_15px_rgba(0,255,136,0.2),inset_0_1px_0_rgba(255,255,255,0.1)] mb-6 backdrop-blur-md"
             >
-              <Send className="w-5 h-5 fill-current text-slate-950" />
-              <span>ADD BOT TO TELEGRAM GROUP</span>
-              <ArrowRight className="w-4 h-4" />
-            </button>
+              <Sparkles className="w-4 h-4 text-emerald-400 animate-spin" />
+              <span className="text-xs font-mono font-semibold text-emerald-300 tracking-wide uppercase">
+                ROBINHOOD CHAIN TELEGRAM AI SENTINEL
+              </span>
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+            </motion.div>
 
-            <button
-              onClick={onNavigateToFeatures}
-              className="px-8 py-4 rounded-xl font-mono text-sm font-bold bg-slate-900/90 text-slate-200 border border-emerald-500/40 hover:border-emerald-400 hover:text-emerald-300 hover:shadow-[0_0_20px_rgba(0,255,136,0.2)] transition-all duration-300 flex items-center gap-2"
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="text-4xl sm:text-5xl lg:text-6xl font-mono font-black tracking-tight text-white leading-tight"
             >
-              <span>EXPLORE ALL FEATURES</span>
-            </button>
-          </motion.div>
+              RobinWatch <span className="text-neon-cyan inline-block">AI</span>
+              <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-green-300 to-lime-400">
+                Robinhood Chain Token & Wallet Intelligence
+              </span>
+            </motion.h1>
 
-          {/* WEBSITE HERO BANNER */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.4 }}
-            className="mt-12 w-full max-w-5xl mx-auto rounded-3xl overflow-hidden border-2 border-emerald-400/50 shadow-[0_0_50px_rgba(0,255,136,0.25)] wire-border-cyan relative group bg-slate-950"
-          >
-            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-emerald-400 to-transparent z-10" />
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="mt-6 text-base text-slate-300 font-sans leading-relaxed max-w-2xl"
+            >
+              Track any token deployed on Robinhood Chain with a single Telegram command. Automatically resolve human developer wallets through factory contracts via Blockscout, score 0-100 risk heuristics, stream live DexScreener market metrics, and engage community groups with a witty AI chatter persona.
+            </motion.p>
+
+            {/* Action CTAs */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="mt-8 flex flex-wrap items-center justify-center lg:justify-start gap-4"
+            >
+              <button
+                onClick={onOpenBotModal}
+                className="px-6 py-3.5 rounded-xl font-mono text-xs sm:text-sm font-bold box-3d-button-emerald hover:scale-105 transition-all duration-300 flex items-center gap-3"
+              >
+                <Send className="w-5 h-5 fill-current text-slate-950" />
+                <span>ADD BOT TO TELEGRAM GROUP</span>
+                <ArrowRight className="w-4 h-4" />
+              </button>
+
+              <button
+                onClick={onNavigateToFeatures}
+                className="px-6 py-3.5 rounded-xl font-mono text-xs sm:text-sm font-bold box-3d-button-slate hover:scale-105 transition-all duration-300 flex items-center gap-2"
+              >
+                <span>EXPLORE ALL FEATURES</span>
+              </button>
+            </motion.div>
+          </div>
+        </div>
+
+        {/* WEBSITE HERO BANNER IN 3D PERSPECTIVE CARD */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95, y: 20 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.4 }}
+          className="mt-6 w-full max-w-5xl mx-auto rounded-3xl overflow-hidden border-2 border-emerald-400/50 shadow-[0_20px_50px_rgba(0,255,136,0.25)] relative group bg-slate-950 perspective-1000"
+        >
+          <div className="transform-style-3d group-hover:rotate-x-1 group-hover:rotate-y-1 transition-all duration-700 ease-out">
+            <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-transparent via-emerald-400 to-transparent z-10" />
             <img
               src="https://sf4service.site/raw/img_dnv6z6vhv.jpg"
               alt="RobinWatch AI Banner"
@@ -250,8 +342,8 @@ export const HomeSection: React.FC<HomeSectionProps> = ({
               referrerPolicy="no-referrer"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent opacity-40 pointer-events-none" />
-          </motion.div>
-        </div>
+          </div>
+        </motion.div>
 
         {/* ROBINHOOD CHAIN LIVE TOKEN INSPECTOR PANEL IN HOME SECTION */}
         <motion.div
@@ -259,11 +351,14 @@ export const HomeSection: React.FC<HomeSectionProps> = ({
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-          className="mt-16 rounded-3xl p-6 sm:p-8 bg-slate-950/80 border border-emerald-500/30 shadow-[0_0_35px_rgba(0,255,136,0.1)] relative overflow-hidden"
+          className="mt-16 rounded-3xl p-6 sm:p-8 bg-slate-900/90 border-t-2 border-l-2 border-emerald-400/50 border-r border-b border-emerald-500/20 shadow-[0_15px_40px_rgba(0,255,136,0.15)] relative overflow-hidden"
         >
+          {/* Cyber scanner glow line */}
+          <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-emerald-400 to-transparent opacity-50 animate-pulse" />
+
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 pb-4 border-b border-slate-800">
             <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/80 text-emerald-300 border border-emerald-500/40 text-[11px] font-mono mb-2">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/80 text-emerald-300 border border-emerald-500/40 text-[11px] font-mono mb-2 shadow-[0_2px_8px_rgba(16,185,129,0.2)]">
                 <Database className="w-3.5 h-3.5 text-emerald-400" />
                 <span>ROBINHOOD CHAIN TRACKER DEMO</span>
               </div>
@@ -275,16 +370,16 @@ export const HomeSection: React.FC<HomeSectionProps> = ({
               </p>
             </div>
 
-            {/* Token Selector Pills */}
+            {/* Token Selector Pills with 3D button styling */}
             <div className="flex items-center gap-2 overflow-x-auto pb-2 sm:pb-0 w-full md:w-auto scrollbar-none">
               {sampleTokens.map((token) => (
                 <button
                   key={token.symbol}
                   onClick={() => setSelectedToken(token)}
-                  className={`px-3 py-1.5 rounded-xl font-mono text-xs font-bold flex items-center gap-2 transition-all duration-200 flex-shrink-0 ${
+                  className={`px-3 py-1.5 rounded-xl font-mono text-xs font-bold flex items-center gap-2 transition-all duration-200 flex-shrink-0 active:translate-y-[2px] ${
                     selectedToken.symbol === token.symbol
-                      ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-400 shadow-[0_0_15px_rgba(0,255,136,0.3)]'
-                      : 'bg-slate-900 text-slate-400 border border-slate-800 hover:text-slate-200'
+                      ? 'bg-emerald-500/20 text-emerald-300 border-t border-l border-emerald-400 border-r border-b border-emerald-500 shadow-[0_4px_12px_rgba(0,255,136,0.3)]'
+                      : 'bg-slate-950 text-slate-400 border border-slate-800 hover:text-slate-200 shadow-[0_2px_4px_rgba(0,0,0,0.4)]'
                   }`}
                 >
                   <span>{token.symbol}</span>
@@ -304,10 +399,10 @@ export const HomeSection: React.FC<HomeSectionProps> = ({
             </div>
           </div>
 
-          {/* Detailed Token Card */}
+          {/* Detailed Token Card with 3D Slabs */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-            {/* Token Basic & Market Data */}
-            <div className="lg:col-span-7 bg-slate-900/80 rounded-2xl p-5 border border-slate-800 space-y-4 font-mono">
+            {/* Token Basic & Market Data (3D Emerald Box) */}
+            <div className="lg:col-span-7 rounded-2xl p-5 box-3d-emerald space-y-4 font-mono">
               <div className="flex items-center justify-between">
                 <div>
                   <h3 className="text-lg font-bold text-white flex items-center gap-2">
@@ -318,13 +413,13 @@ export const HomeSection: React.FC<HomeSectionProps> = ({
                     <ExternalLink className="w-3 h-3 text-emerald-400 flex-shrink-0" />
                   </p>
                 </div>
-                <span className="px-3 py-1 rounded-lg bg-emerald-950/80 text-emerald-300 text-xs border border-emerald-500/30 font-semibold">
+                <span className="px-3 py-1 rounded-lg bg-emerald-950/80 text-emerald-300 text-xs border border-emerald-500/30 font-semibold shadow-[inset_0_1px_0_rgba(255,255,255,0.1)]">
                   {selectedToken.chain}
                 </span>
               </div>
 
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3 pt-2">
-                <div className="bg-slate-950 p-2.5 sm:p-3 rounded-xl border border-slate-800 min-w-0">
+                <div className="bg-slate-950/90 p-2.5 sm:p-3 rounded-xl border-t border-l border-emerald-500/20 border-r border-b border-slate-900 shadow-[inset_0_2px_4px_rgba(0,0,0,0.6)] min-w-0 hover:-translate-y-0.5 hover:shadow-[0_4px_12px_rgba(0,255,136,0.1)] transition-all duration-200">
                   <span className="text-[9px] sm:text-[10px] text-slate-400 block truncate">PRICE (USD)</span>
                   <span className="text-xs sm:text-sm font-bold text-emerald-400 block truncate">${selectedToken.priceUsd}</span>
                   <span
@@ -337,7 +432,7 @@ export const HomeSection: React.FC<HomeSectionProps> = ({
                   </span>
                 </div>
 
-                <div className="bg-slate-950 p-2.5 sm:p-3 rounded-xl border border-slate-800 min-w-0">
+                <div className="bg-slate-950/90 p-2.5 sm:p-3 rounded-xl border-t border-l border-emerald-500/20 border-r border-b border-slate-900 shadow-[inset_0_2px_4px_rgba(0,0,0,0.6)] min-w-0 hover:-translate-y-0.5 hover:shadow-[0_4px_12px_rgba(0,255,136,0.1)] transition-all duration-200">
                   <span className="text-[9px] sm:text-[10px] text-slate-400 block truncate">FDV / MARKET CAP</span>
                   <span className="text-xs sm:text-sm font-bold text-white block truncate">
                     ${(selectedToken.fdv / 1000000).toFixed(2)}M
@@ -345,7 +440,7 @@ export const HomeSection: React.FC<HomeSectionProps> = ({
                   <span className="text-[9px] sm:text-[10px] text-slate-500 block truncate">DexScreener Feed</span>
                 </div>
 
-                <div className="bg-slate-950 p-2.5 sm:p-3 rounded-xl border border-slate-800 min-w-0">
+                <div className="bg-slate-950/90 p-2.5 sm:p-3 rounded-xl border-t border-l border-emerald-500/20 border-r border-b border-slate-900 shadow-[inset_0_2px_4px_rgba(0,0,0,0.6)] min-w-0 hover:-translate-y-0.5 hover:shadow-[0_4px_12px_rgba(0,255,136,0.1)] transition-all duration-200">
                   <span className="text-[9px] sm:text-[10px] text-slate-400 block truncate">POOLED LIQUIDITY</span>
                   <span className="text-xs sm:text-sm font-bold text-emerald-400 block truncate">
                     ${(selectedToken.liquidityUsd / 1000).toFixed(0)}k
@@ -353,7 +448,7 @@ export const HomeSection: React.FC<HomeSectionProps> = ({
                   <span className="text-[9px] sm:text-[10px] text-slate-500 block truncate">DEX Locked</span>
                 </div>
 
-                <div className="bg-slate-950 p-2.5 sm:p-3 rounded-xl border border-slate-800 min-w-0">
+                <div className="bg-slate-950/90 p-2.5 sm:p-3 rounded-xl border-t border-l border-emerald-500/20 border-r border-b border-slate-900 shadow-[inset_0_2px_4px_rgba(0,0,0,0.6)] min-w-0 hover:-translate-y-0.5 hover:shadow-[0_4px_12px_rgba(0,255,136,0.1)] transition-all duration-200">
                   <span className="text-[9px] sm:text-[10px] text-slate-400 block truncate">24H VOLUME</span>
                   <span className="text-xs sm:text-sm font-bold text-purple-400 block truncate">
                     ${(selectedToken.volume24h / 1000000).toFixed(2)}M
@@ -364,8 +459,8 @@ export const HomeSection: React.FC<HomeSectionProps> = ({
                 </div>
               </div>
 
-              {/* Dev Wallet Resolution Info */}
-              <div className="p-3.5 rounded-xl bg-slate-950 border border-emerald-500/20 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+              {/* Dev Wallet Resolution Info with 3D visual hierarchy */}
+              <div className="p-3.5 rounded-xl bg-slate-950/90 border-l-4 border-emerald-400 border-t border-r border-b border-slate-900 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs shadow-[inset_0_2px_4px_rgba(0,0,0,0.6)]">
                 <div className="flex items-center gap-2">
                   <Layers className="w-4 h-4 text-emerald-400 flex-shrink-0" />
                   <div>
@@ -373,15 +468,15 @@ export const HomeSection: React.FC<HomeSectionProps> = ({
                     <span className="text-white font-bold break-all">{selectedToken.deployerAddress}</span>
                   </div>
                 </div>
-                <div className="flex items-center gap-1.5 px-2.5 py-1 rounded bg-emerald-950/80 text-emerald-300 text-[10px] border border-emerald-500/30 flex-shrink-0">
+                <div className="flex items-center gap-1.5 px-2.5 py-1 rounded bg-emerald-950/80 text-emerald-300 text-[10px] border border-emerald-500/30 flex-shrink-0 shadow-[0_2px_4px_rgba(0,0,0,0.4)]">
                   <CheckCircle2 className="w-3 h-3 text-emerald-400" />
                   <span>BLOCKSCOUT FACTORY TRACED</span>
                 </div>
               </div>
             </div>
 
-            {/* Risk Assessment Breakdown */}
-            <div className="lg:col-span-5 bg-slate-900/80 rounded-2xl p-5 border border-slate-800 flex flex-col justify-between space-y-4 font-mono">
+            {/* Risk Assessment Breakdown (3D Purple Box) */}
+            <div className="lg:col-span-5 rounded-2xl p-5 box-3d-purple flex flex-col justify-between space-y-4 font-mono">
               <div>
                 <div className="flex items-center justify-between mb-3">
                   <h4 className="text-sm font-bold text-white flex items-center gap-2">
@@ -391,7 +486,7 @@ export const HomeSection: React.FC<HomeSectionProps> = ({
                   <span className="text-[10px] text-slate-400">0-100 Heuristics</span>
                 </div>
 
-                <div className="flex items-center gap-4 bg-slate-950 p-4 rounded-xl border border-slate-800 mb-4">
+                <div className="flex items-center gap-4 bg-slate-950/90 p-4 rounded-xl border-l-4 border-purple-500 border-t border-r border-b border-slate-900 mb-4 shadow-[inset_0_2px_4px_rgba(0,0,0,0.6)]">
                   <div
                     className={`w-16 h-16 rounded-full flex flex-col items-center justify-center font-bold border-2 ${
                       selectedToken.riskScore < 30
@@ -424,7 +519,7 @@ export const HomeSection: React.FC<HomeSectionProps> = ({
                   </div>
                 </div>
 
-                <div className="space-y-2 text-xs text-slate-300 bg-slate-950 p-3 rounded-xl border border-slate-800">
+                <div className="space-y-2 text-xs text-slate-300 bg-slate-950/90 p-3 rounded-xl border border-slate-900 shadow-[inset_0_2px_4px_rgba(0,0,0,0.6)]">
                   <span className="text-[10px] text-emerald-400 font-bold block uppercase tracking-wider">
                     Automated Plain-Language Report:
                   </span>
