@@ -16,3 +16,12 @@
     X-XSS-Protection = "1; mode=block"
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
+
+# Explicit MIME-type support for 3D binary assets
+[[headers]]
+  for = "/*.glb"
+  [headers.values]
+    Content-Type = "model/gltf-binary"
+    Access-Control-Allow-Origin = "*"
+    Cache-Control = "public, max-age=31536000, immutable"
+

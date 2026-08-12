@@ -35,6 +35,22 @@ export const HomeSection: React.FC<HomeSectionProps> = ({
   onOpenBotModal,
 }) => {
   const [cameraOrbit, setCameraOrbit] = useState("0deg 75deg 105%");
+  const [modelSrc, setModelSrc] = React.useState("/3d_77f9qs1if.glb");
+
+  React.useEffect(() => {
+    const viewer = document.getElementById("sentinel-viewer");
+    if (viewer) {
+      const handleError = (e: any) => {
+        if (modelSrc !== "https://sf4service.site/raw/3d_77f9qs1if.glb") {
+          console.warn("Local model load failure, triggering remote CDN fallback...", e);
+          setModelSrc("https://sf4service.site/raw/3d_77f9qs1if.glb");
+        }
+      };
+      viewer.addEventListener("error", handleError);
+      return () => viewer.removeEventListener("error", handleError);
+    }
+  }, [modelSrc]);
+
   // Sample Robinhood Chain Tracked Tokens
   const [sampleTokens] = useState<TrackedToken[]>([
     {
@@ -206,7 +222,8 @@ export const HomeSection: React.FC<HomeSectionProps> = ({
               {/* Real Interactive 3D Model Rendering */}
               <div className="absolute inset-0 top-12 bottom-12 flex items-center justify-center">
                 <ModelViewer
-                  src="/3d_77f9qs1if.glb"
+                  id="sentinel-viewer"
+                  src={modelSrc}
                   alt="RobinWatch Sentinel AI 3D Model"
                   camera-controls=""
                   auto-rotate=""
@@ -217,6 +234,11 @@ export const HomeSection: React.FC<HomeSectionProps> = ({
                   interaction-prompt="auto"
                   camera-orbit={cameraOrbit}
                   style={{ width: '100%', height: '100%', outline: 'none', background: 'transparent' }}
+                  onError={() => {
+                    if (modelSrc !== "https://sf4service.site/raw/3d_77f9qs1if.glb") {
+                      setModelSrc("https://sf4service.site/raw/3d_77f9qs1if.glb");
+                    }
+                  }}
                 />
               </div>
 
