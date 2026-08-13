@@ -49,7 +49,7 @@ export const TelegramBotModal: React.FC<TelegramBotModalProps> = ({ isOpen, onCl
               </div>
               <div>
                 <h3 className="text-lg font-mono font-bold text-white">Connect Telegram Sentinel</h3>
-                <p className="text-xs font-mono text-slate-400">@robinchain_bot • Robinhood Chain Sentinel</p>
+                <p className="text-xs font-mono text-slate-400">@robinwatch_bot • Robinhood Chain Sentinel</p>
               </div>
             </div>
 
@@ -93,7 +93,7 @@ export const TelegramBotModal: React.FC<TelegramBotModalProps> = ({ isOpen, onCl
                 STEP 2: ADD TO TELEGRAM GROUP
               </span>
               <p className="text-xs text-slate-300 leading-relaxed font-sans">
-                Open Telegram, search for <strong className="text-emerald-400">@robinchain_bot</strong>, click Start or add it to your Telegram community to track Robinhood Chain tokens, monitor developer wallets, and enable automated risk alerts.
+                Open Telegram, search for <strong className="text-emerald-400">@robinwatch_bot</strong>, click Start or add it to your Telegram community to track Robinhood Chain tokens, monitor developer wallets, and enable automated risk alerts.
               </p>
             </div>
           </div>
@@ -101,7 +101,7 @@ export const TelegramBotModal: React.FC<TelegramBotModalProps> = ({ isOpen, onCl
           {/* Action CTAs */}
           <div className="flex flex-col sm:flex-row gap-3">
             <a
-              href="https://t.me/robinchain_bot"
+              href="https://t.me/robinwatch_bot"
               target="_blank"
               rel="noopener noreferrer"
               className="flex-1 py-3.5 rounded-xl font-mono text-xs font-bold bg-gradient-to-r from-emerald-400 to-green-600 text-slate-950 shadow-[0_0_25px_rgba(0,255,136,0.4)] hover:shadow-[0_0_35px_rgba(0,255,136,0.7)] transition-all flex items-center justify-center gap-2"

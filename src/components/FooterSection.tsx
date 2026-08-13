@@ -83,7 +83,7 @@ export const FooterSection: React.FC<FooterSectionProps> = ({
               Telegram Sentinel Node
             </h4>
             <p className="text-xs font-mono text-slate-400">
-              Robinhood Chain Bot: <span className="text-emerald-300 font-bold block sm:inline mt-0.5 sm:mt-0">@robinchain_bot</span>
+              Robinhood Chain Bot: <span className="text-emerald-300 font-bold block sm:inline mt-0.5 sm:mt-0">@robinwatch_bot</span>
             </p>
             <button
               onClick={onOpenBotModal}
