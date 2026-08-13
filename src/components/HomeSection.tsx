@@ -55,6 +55,27 @@ export const HomeSection: React.FC<HomeSectionProps> = ({
   // Sample Robinhood Chain Tracked Tokens
   const [sampleTokens] = useState<TrackedToken[]>([
     {
+      symbol: '$ROBINWATCH',
+      name: 'RobinWatch AI Token',
+      contractAddress: '0xB928624904B8E1172B94143163E77f69ec6F7777',
+      chain: 'Robinhood Chain',
+      priceUsd: 0.1245,
+      priceChange24h: +38.2,
+      fdv: 12450000,
+      marketCap: 12450000,
+      liquidityUsd: 1850000,
+      volume24h: 3150000,
+      buys24h: 5820,
+      sells24h: 2190,
+      deployerAddress: '0x3a91829f041284910293849102934891284912ab',
+      isFactoryTraced: true,
+      riskScore: 5,
+      riskLevel: 'LOW',
+      confidenceRating: 99,
+      explanation: 'Official RobinWatch AI Token on Robinhood Chain. Liquidity locked 100%. No malicious developer wallet transactions found.',
+      embedChartUrl: 'https://dexscreener.com/robinhood/0xAfBE2d3E53a09f1741fCb992B26c9020DC270016?embed=1&loadChartSettings=0&chartLeftToolbar=0&chartTheme=dark&theme=dark&chartStyle=0&chartType=usd&interval=15',
+    },
+    {
       symbol: '$HOODIE',
       name: 'RobinHoodie Sentinel',
       contractAddress: '0x71a29f8e4c1b9201934812349081239849129b42',
@@ -579,6 +600,38 @@ export const HomeSection: React.FC<HomeSectionProps> = ({
               </div>
             </div>
           </div>
+
+          {/* DexScreener Interactive Embed Chart */}
+          {selectedToken.embedChartUrl && (
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="mt-6 rounded-2xl overflow-hidden border border-emerald-500/30 bg-[#090d16]/90 p-1 shadow-[0_0_25px_rgba(16,185,129,0.15)]"
+              id="live-chart-container"
+            >
+              <div className="flex items-center justify-between px-4 py-2.5 bg-slate-900/80 rounded-t-xl border-b border-slate-800 font-mono text-[10px] md:text-xs text-slate-400">
+                <div className="flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                  <span className="font-bold text-emerald-300">LIVE DEXSCREENER INTERACTIVE CHART // {selectedToken.symbol}</span>
+                </div>
+                <span className="text-[9px] md:text-[10px] bg-slate-950 px-2 py-0.5 rounded border border-slate-800 text-slate-400 uppercase tracking-wider">
+                  Robinhood AMM Pool Feed
+                </span>
+              </div>
+              
+              {/* Embed Chart Wrapper mimicking the user's specific styling rules but responsive */}
+              <div className="relative w-full overflow-hidden rounded-b-xl" style={{ paddingTop: '56.25%', minHeight: '400px' }}>
+                <iframe 
+                  src={selectedToken.embedChartUrl}
+                  className="absolute inset-0 w-full h-full border-0 bg-slate-950"
+                  title={`DexScreener Live Chart - ${selectedToken.symbol}`}
+                  referrerPolicy="no-referrer"
+                  allowFullScreen
+                />
+              </div>
+            </motion.div>
+          )}
         </motion.div>
       </div>
     </section>

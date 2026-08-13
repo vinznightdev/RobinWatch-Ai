@@ -39,6 +39,7 @@ export interface TrackedToken {
   riskLevel: 'LOW' | 'MEDIUM' | 'HIGH' | 'CRITICAL';
   confidenceRating: number;
   explanation: string;
+  embedChartUrl?: string;
 }
 
 export interface DeveloperWallet {
