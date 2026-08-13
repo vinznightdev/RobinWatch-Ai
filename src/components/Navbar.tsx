@@ -6,12 +6,14 @@ interface NavbarProps {
   activeSection: SectionId;
   onNavigate: (section: SectionId) => void;
   onOpenBotModal: () => void;
+  onOpenWhitepaper: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
   activeSection,
   onNavigate,
   onOpenBotModal,
+  onOpenWhitepaper,
 }) => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -99,6 +101,13 @@ export const Navbar: React.FC<NavbarProps> = ({
                 </button>
               );
             })}
+            <button
+              onClick={onOpenWhitepaper}
+              className="px-4 py-2 rounded-lg text-xs font-mono font-semibold transition-all duration-300 text-slate-400 hover:text-emerald-300 hover:bg-emerald-950/40 hover:border-emerald-500/30 border border-transparent"
+              id="desktop-whitepaper-nav-btn"
+            >
+              Whitepaper
+            </button>
           </nav>
 
           {/* Right Action CTA Button */}
@@ -182,6 +191,17 @@ export const Navbar: React.FC<NavbarProps> = ({
                 {activeSection === item.id && <span className="w-2 h-2 rounded-full bg-emerald-400" />}
               </button>
             ))}
+            <button
+              onClick={() => {
+                setMobileMenuOpen(false);
+                onOpenWhitepaper();
+              }}
+              className="w-full text-left px-4 py-3 rounded-lg text-sm font-mono font-medium text-slate-300 hover:text-emerald-300 hover:bg-slate-900 flex items-center justify-between border border-transparent"
+              id="mobile-whitepaper-nav-btn"
+            >
+              <span>Whitepaper</span>
+              <span className="text-emerald-400 font-mono text-[10px]">DOC // V2</span>
+            </button>
           </div>
 
           <div className="grid grid-cols-2 gap-2 pt-2">

@@ -8,10 +8,12 @@ import { FeaturesSection } from './components/FeaturesSection';
 import { SubscriptionSection } from './components/SubscriptionSection';
 import { FooterSection } from './components/FooterSection';
 import { TelegramBotModal } from './components/TelegramBotModal';
+import { WhitepaperModal } from './components/WhitepaperModal';
 
 export default function App() {
   const [activeSection, setActiveSection] = useState<SectionId>('home');
   const [isBotModalOpen, setIsBotModalOpen] = useState(false);
+  const [isWhitepaperOpen, setIsWhitepaperOpen] = useState(false);
 
   // Smooth scroll handler to target section
   const scrollToSection = (sectionId: SectionId) => {
@@ -21,6 +23,7 @@ export default function App() {
       element.scrollIntoView({ behavior: 'smooth' });
     }
   };
+
 
   // IntersectionObserver to auto update active navbar tab when scrolling
   useEffect(() => {
@@ -56,6 +59,7 @@ export default function App() {
         activeSection={activeSection}
         onNavigate={scrollToSection}
         onOpenBotModal={() => setIsBotModalOpen(true)}
+        onOpenWhitepaper={() => setIsWhitepaperOpen(true)}
       />
 
       {/* Main Content Area - Strictly Home, About, Features, Footer */}
@@ -82,6 +86,12 @@ export default function App() {
       <TelegramBotModal
         isOpen={isBotModalOpen}
         onClose={() => setIsBotModalOpen(false)}
+      />
+
+      {/* Technical Whitepaper Reader Modal */}
+      <WhitepaperModal
+        isOpen={isWhitepaperOpen}
+        onClose={() => setIsWhitepaperOpen(false)}
       />
     </div>
   );
