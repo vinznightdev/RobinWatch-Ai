@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { Check, X, Sparkles, Bot, Zap, Shield, Crown } from 'lucide-react';
+import { Check, X, Sparkles, Zap, Shield, Crown } from 'lucide-react';
 
 interface SubscriptionSectionProps {
   onOpenBotModal: () => void;
@@ -15,11 +15,12 @@ interface Plan {
   id: string;
   name: string;
   price: string;
-  billingPeriod: string | null;
+  priceSuffix: string | null;
   description: string;
   badge: string | null;
   isFeatured: boolean;
   buttonText: string;
+  isDisabled: boolean;
   features: PlanFeature[];
 }
 
@@ -29,80 +30,50 @@ export const SubscriptionSection: React.FC<SubscriptionSectionProps> = ({ onOpen
       id: "basic",
       name: "BASIC",
       price: "Free",
-      billingPeriod: null,
+      priceSuffix: null,
       badge: null,
       isFeatured: false,
-      description: "Get started with essential token tracking and community access.",
+      isDisabled: true,
       buttonText: "Current Plan",
+      description: "Essential token tracking and limited community access for any group.",
       features: [
-        { text: "Track 1 token per group", included: true },
-        { text: "Market data (/token, /chart, /liquidity)", included: true },
-        { text: "Bot status (/status)", included: true },
-        { text: "5 free AI questions per group", included: true },
-        { text: "Developer wallet view (/dev)", included: false },
+        { text: "Track 1 token per group (/track)", included: true },
+        { text: "Live market data (/token, /chart, /liquidity)", included: true },
+        { text: "Bot status check (/status)", included: true },
+        { text: "5 free AI questions per member", included: true },
+        { text: "Welcome messages for new members", included: true },
+        { text: "Developer wallet monitoring (/dev, /activity)", included: false },
+        { text: "Automated risk scoring (/risk)", included: false },
         { text: "Buy alerts (/setbuy)", included: false },
-        { text: "Verification gate (/setup)", included: false },
-        { text: "Social media raids (/raid)", included: false }
-      ]
-    },
-    {
-      id: "budget",
-      name: "BUDGET",
-      price: "$9",
-      billingPeriod: "/mo",
-      badge: null,
-      isFeatured: false,
-      description: "For small communities that need wallet monitoring and buy alerts.",
-      buttonText: "Choose Budget",
-      features: [
-        { text: "Track up to 3 tokens per group", included: true },
-        { text: "All Basic commands", included: true },
-        { text: "Developer wallet view (/dev, /activity, /risk)", included: true },
-        { text: "20 AI questions per day", included: true },
-        { text: "Buy alerts for 1 token (/setbuy)", included: true },
-        { text: "Verification gate (/setup)", included: true },
+        { text: "Member verification gate (/setup)", included: false },
         { text: "Social media raids (/raid)", included: false },
+        { text: "AI activity reports (/summary)", included: false },
         { text: "Unlimited AI questions", included: false }
-      ]
-    },
-    {
-      id: "plus",
-      name: "PLUS",
-      price: "$29",
-      billingPeriod: "/mo",
-      badge: "Most Popular",
-      isFeatured: true,
-      description: "For active communities with multiple tokens and unlimited AI.",
-      buttonText: "Choose Plus",
-      features: [
-        { text: "Track up to 10 tokens per group", included: true },
-        { text: "All Budget commands", included: true },
-        { text: "Unlimited AI questions", included: true },
-        { text: "AI activity reports (/summary)", included: true },
-        { text: "Buy alerts for up to 3 tokens", included: true },
-        { text: "Verification gate with custom holding %", included: true },
-        { text: "Social media raids (/raid)", included: true },
-        { text: "Priority support", included: true }
       ]
     },
     {
       id: "pro",
       name: "PRO",
-      price: "$99",
-      billingPeriod: "/mo",
-      badge: "Developer Tier",
-      isFeatured: false,
-      description: "For large communities and token teams that need it all.",
-      buttonText: "Choose Pro",
+      price: "1%",
+      priceSuffix: "/holding",
+      badge: "Most Popular",
+      isFeatured: true,
+      isDisabled: false,
+      buttonText: "Hold 1% to Unlock",
+      description: "Full bot access with no limits. Requires holding at least 1% of the group's verification token to unlock unlimited usage.",
       features: [
-        { text: "Track unlimited tokens", included: true },
-        { text: "All Plus features", included: true },
-        { text: "Admin unlimited access (no limits)", included: true },
-        { text: "Buy alerts for unlimited tokens", included: true },
-        { text: "Custom animated emojis on alerts", included: true },
-        { text: "Custom banner branding", included: true },
-        { text: "Dedicated support & onboarding", included: true },
-        { text: "Early access to new features", included: true }
+        { text: "Track multiple tokens per group (/track)", included: true },
+        { text: "All Basic commands included", included: true },
+        { text: "Developer wallet monitoring (/dev, /activity)", included: true },
+        { text: "Automated risk scoring (/risk)", included: true },
+        { text: "Real-time buy alerts (/setbuy)", included: true },
+        { text: "Member verification gate (/setup)", included: true },
+        { text: "Social media raids (/raid)", included: true },
+        { text: "AI activity reports (/summary)", included: true },
+        { text: "Unlimited AI questions (with 1% holding)", included: true },
+        { text: "Admin unlimited access — no limits", included: true },
+        { text: "Custom banner & emoji on buy alerts", included: true },
+        { text: "Automatic holding re-check every 5 min", included: true }
       ]
     }
   ];
@@ -114,7 +85,7 @@ export const SubscriptionSection: React.FC<SubscriptionSectionProps> = ({ onOpen
       <div className="absolute bottom-1/4 right-0 w-[450px] h-[450px] bg-emerald-500/5 rounded-full blur-[140px] pointer-events-none" />
       <div className="absolute top-1/4 left-10 w-[400px] h-[400px] bg-purple-500/5 rounded-full blur-[140px] pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
           <motion.div
@@ -135,7 +106,7 @@ export const SubscriptionSection: React.FC<SubscriptionSectionProps> = ({ onOpen
             transition={{ duration: 0.5, delay: 0.1 }}
             className="text-3xl sm:text-5xl font-mono font-black text-white tracking-tight"
           >
-            Choose Your <span className="text-emerald-400">RobinWatch AI</span> Plan
+            RobinWatch AI Plans
           </motion.h2>
 
           <motion.p
@@ -145,12 +116,12 @@ export const SubscriptionSection: React.FC<SubscriptionSectionProps> = ({ onOpen
             transition={{ duration: 0.5, delay: 0.2 }}
             className="mt-4 text-sm sm:text-base text-slate-300 leading-relaxed font-sans"
           >
-            Every plan unlocks Telegram bot features for your community group. Upgrade anytime to track more tokens, get buy alerts, and remove AI question limits.
+            Start free with Basic, or unlock the full bot with PRO. PRO members must hold at least 1% of their group's verification token to use the bot with no limits.
           </motion.p>
         </div>
 
         {/* Plans Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 items-stretch">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch max-w-4xl mx-auto">
           {plans.map((plan, index) => {
             return (
               <motion.div
@@ -160,7 +131,7 @@ export const SubscriptionSection: React.FC<SubscriptionSectionProps> = ({ onOpen
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 whileHover={{ y: -8 }}
-                className={`relative flex flex-col justify-between rounded-2xl p-6 sm:p-7 transition-all duration-300 ${
+                className={`relative flex flex-col justify-between rounded-2xl p-6 sm:p-8 transition-all duration-300 ${
                   plan.isFeatured
                     ? 'bg-slate-900/90 border-2 border-emerald-400 shadow-[0_0_30px_rgba(16,185,129,0.25)] ring-1 ring-emerald-400/40'
                     : 'bg-slate-950/80 border border-slate-800/80 shadow-[0_10px_30px_rgba(0,0,0,0.3)] hover:border-slate-700'
@@ -185,8 +156,6 @@ export const SubscriptionSection: React.FC<SubscriptionSectionProps> = ({ onOpen
                     </span>
                     {plan.isFeatured ? (
                       <Crown className="w-5 h-5 text-emerald-400 animate-bounce" />
-                    ) : plan.id === 'pro' ? (
-                      <Zap className="w-5 h-5 text-purple-400" />
                     ) : (
                       <Shield className="w-5 h-5 text-slate-500" />
                     )}
@@ -197,9 +166,9 @@ export const SubscriptionSection: React.FC<SubscriptionSectionProps> = ({ onOpen
                     <span className="text-4xl sm:text-5xl font-mono font-black text-white">
                       {plan.price}
                     </span>
-                    {plan.billingPeriod && (
-                      <span className="text-sm font-mono text-slate-400">
-                        {plan.billingPeriod}
+                    {plan.priceSuffix && (
+                      <span className="text-sm font-mono text-emerald-400 font-semibold">
+                        {plan.priceSuffix}
                       </span>
                     )}
                   </div>
@@ -231,11 +200,13 @@ export const SubscriptionSection: React.FC<SubscriptionSectionProps> = ({ onOpen
                 {/* Card CTA Button */}
                 <button
                   onClick={onOpenBotModal}
-                  disabled={true}
-                  className={`w-full py-3.5 rounded-xl font-mono text-xs font-bold transition-all duration-300 cursor-not-allowed opacity-40 ${
-                    plan.isFeatured
-                      ? 'bg-gradient-to-r from-emerald-400/80 to-green-600/80 text-slate-950/80 shadow-none'
-                      : 'border border-slate-900 bg-slate-950 text-slate-600'
+                  disabled={plan.isDisabled}
+                  className={`w-full py-3.5 rounded-xl font-mono text-xs font-bold transition-all duration-300 ${
+                    plan.isDisabled
+                      ? 'border border-slate-900 bg-slate-950/40 text-slate-600 cursor-not-allowed opacity-50'
+                      : plan.isFeatured
+                      ? 'active:scale-95 bg-gradient-to-r from-emerald-400 to-green-600 text-slate-950 shadow-[0_0_20px_rgba(0,255,136,0.3)] hover:shadow-[0_0_30px_rgba(0,255,136,0.6)] hover:scale-[1.02]'
+                      : 'active:scale-95 border border-slate-800 bg-slate-900/40 text-slate-300 hover:text-white hover:border-slate-600 hover:bg-slate-900'
                   }`}
                 >
                   {plan.buttonText}
@@ -248,3 +219,4 @@ export const SubscriptionSection: React.FC<SubscriptionSectionProps> = ({ onOpen
     </section>
   );
 };
+
