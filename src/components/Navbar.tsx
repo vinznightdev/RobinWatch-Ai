@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { SectionId } from '../types';
-import { Bot, Radio, Menu, X, Send } from 'lucide-react';
+import { Bot, Radio, Menu, X, Send, Twitter } from 'lucide-react';
 
 interface NavbarProps {
   activeSection: SectionId;
@@ -28,6 +28,7 @@ export const Navbar: React.FC<NavbarProps> = ({
     { id: 'home', label: 'Home' },
     { id: 'about', label: 'About' },
     { id: 'features', label: 'Features' },
+    { id: 'pricing', label: 'Pricing' },
   ];
 
   const handleNavClick = (id: SectionId) => {
@@ -107,11 +108,32 @@ export const Navbar: React.FC<NavbarProps> = ({
               <span>TELEGRAM NODE: <strong className="text-emerald-400">ONLINE</strong></span>
             </div>
 
+            {/* Social Links */}
+            <a
+              href="https://x.com/Robinonhoodrh"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-2.5 rounded-xl bg-slate-900 border border-emerald-500/20 text-slate-400 hover:text-emerald-400 hover:border-emerald-400/50 hover:scale-105 active:scale-95 transition-all shadow-[0_0_10px_rgba(0,255,136,0.05)]"
+              title="Follow us on X"
+            >
+              <Twitter className="w-4 h-4" />
+            </a>
+
+            <a
+              href="https://t.me/robinonhoodrh"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-2.5 rounded-xl bg-slate-900 border border-emerald-500/20 text-slate-400 hover:text-emerald-400 hover:border-emerald-400/50 hover:scale-105 active:scale-95 transition-all shadow-[0_0_10px_rgba(0,255,136,0.05)]"
+              title="Join Telegram Community"
+            >
+              <Send className="w-4 h-4" />
+            </a>
+
             <button
               onClick={onOpenBotModal}
               className="relative group px-5 py-2.5 rounded-xl text-xs font-mono font-bold bg-gradient-to-r from-emerald-400 to-green-600 text-slate-950 shadow-[0_0_20px_rgba(0,255,136,0.4)] hover:shadow-[0_0_30px_rgba(0,255,136,0.7)] hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 flex items-center gap-2"
             >
-              <Send className="w-4 h-4 text-slate-950 fill-current" />
+              <Bot className="w-4 h-4 text-slate-950" />
               <span>CONNECT BOT</span>
               <span className="absolute -bottom-1 left-2 right-2 h-[2px] bg-emerald-200 blur-[1px]" />
             </button>
@@ -124,7 +146,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               className="p-2 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-400"
               aria-label="Connect Telegram Bot"
             >
-              <Send className="w-4 h-4" />
+              <Bot className="w-4 h-4" />
             </button>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -162,6 +184,27 @@ export const Navbar: React.FC<NavbarProps> = ({
             ))}
           </div>
 
+          <div className="grid grid-cols-2 gap-2 pt-2">
+            <a
+              href="https://x.com/Robinonhoodrh"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="py-2.5 rounded-xl text-xs font-mono font-semibold bg-slate-900 border border-slate-800 text-slate-300 flex items-center justify-center gap-2"
+            >
+              <Twitter className="w-4 h-4" />
+              <span>X / Twitter</span>
+            </a>
+            <a
+              href="https://t.me/robinonhoodrh"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="py-2.5 rounded-xl text-xs font-mono font-semibold bg-slate-900 border border-slate-800 text-slate-300 flex items-center justify-center gap-2"
+            >
+              <Send className="w-4 h-4" />
+              <span>Community</span>
+            </a>
+          </div>
+
           <button
             onClick={() => {
               setMobileMenuOpen(false);
@@ -169,7 +212,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             }}
             className="w-full py-3 rounded-xl text-xs font-mono font-bold bg-emerald-400 text-slate-950 flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(0,255,136,0.4)]"
           >
-            <Send className="w-4 h-4" />
+            <Bot className="w-4 h-4" />
             <span>LAUNCH TELEGRAM BOT</span>
           </button>
         </div>

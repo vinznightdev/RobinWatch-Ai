@@ -5,6 +5,7 @@ import { Navbar } from './components/Navbar';
 import { HomeSection } from './components/HomeSection';
 import { AboutSection } from './components/AboutSection';
 import { FeaturesSection } from './components/FeaturesSection';
+import { SubscriptionSection } from './components/SubscriptionSection';
 import { FooterSection } from './components/FooterSection';
 import { TelegramBotModal } from './components/TelegramBotModal';
 
@@ -23,7 +24,7 @@ export default function App() {
 
   // IntersectionObserver to auto update active navbar tab when scrolling
   useEffect(() => {
-    const sections: SectionId[] = ['home', 'about', 'features'];
+    const sections: SectionId[] = ['home', 'about', 'features', 'pricing'];
 
     const handleScroll = () => {
       const scrollPosition = window.scrollY + 250;
@@ -67,6 +68,8 @@ export default function App() {
         <AboutSection />
 
         <FeaturesSection onOpenBotModal={() => setIsBotModalOpen(true)} />
+
+        <SubscriptionSection onOpenBotModal={() => setIsBotModalOpen(true)} />
       </main>
 
       {/* Footer Section */}

@@ -1,6 +1,6 @@
 import React from 'react';
 import { SectionId } from '../types';
-import { Bot, Send, Radio, Shield, Heart } from 'lucide-react';
+import { Bot, Send, Radio, Shield, Heart, Twitter } from 'lucide-react';
 
 interface FooterSectionProps {
   onNavigate: (section: SectionId) => void;
@@ -74,6 +74,14 @@ export const FooterSection: React.FC<FooterSectionProps> = ({
                   <span className="text-emerald-500 group-hover:translate-x-0.5 transition-transform">›</span> Features
                 </button>
               </li>
+              <li>
+                <button
+                  onClick={() => onNavigate('pricing')}
+                  className="hover:text-emerald-300 transition-all duration-200 flex items-center gap-2 group text-left"
+                >
+                  <span className="text-emerald-500 group-hover:translate-x-0.5 transition-transform">›</span> Pricing
+                </button>
+              </li>
             </ul>
           </div>
 
@@ -92,6 +100,27 @@ export const FooterSection: React.FC<FooterSectionProps> = ({
               <Send className="w-4 h-4 fill-current flex-shrink-0" />
               <span>CONNECT TELEGRAM BOT</span>
             </button>
+
+            <div className="flex gap-2.5 pt-1.5">
+              <a
+                href="https://x.com/Robinonhoodrh"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1 py-2.5 px-3 rounded-xl border border-slate-800 bg-slate-900/50 hover:bg-slate-900 text-slate-400 hover:text-emerald-400 hover:border-emerald-500/40 transition-all flex items-center justify-center gap-1.5 text-[11px] font-mono"
+              >
+                <Twitter className="w-3.5 h-3.5" />
+                <span>X / TWITTER</span>
+              </a>
+              <a
+                href="https://t.me/robinonhoodrh"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1 py-2.5 px-3 rounded-xl border border-slate-800 bg-slate-900/50 hover:bg-slate-900 text-slate-400 hover:text-emerald-400 hover:border-emerald-500/40 transition-all flex items-center justify-center gap-1.5 text-[11px] font-mono"
+              >
+                <Send className="w-3.5 h-3.5" />
+                <span>COMMUNITY</span>
+              </a>
+            </div>
           </div>
         </div>
 

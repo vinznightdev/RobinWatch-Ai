@@ -1,4 +1,4 @@
-export type SectionId = 'home' | 'about' | 'features';
+export type SectionId = 'home' | 'about' | 'features' | 'pricing';
 
 export interface BotCommand {
   command: string;

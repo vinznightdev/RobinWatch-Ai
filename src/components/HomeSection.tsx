@@ -20,7 +20,8 @@ import {
   RefreshCw,
   BarChart3,
   Layers,
-  Database
+  Database,
+  Twitter
 } from 'lucide-react';
 
 interface HomeSectionProps {
@@ -337,6 +338,26 @@ export const HomeSection: React.FC<HomeSectionProps> = ({
                 <span>ADD BOT TO TELEGRAM GROUP</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
+
+              <a
+                href="https://x.com/Robinonhoodrh"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-5 py-3.5 rounded-xl font-mono text-xs sm:text-sm font-bold bg-slate-900 border border-emerald-500/20 text-slate-300 hover:text-emerald-300 hover:border-emerald-400/50 hover:scale-105 transition-all duration-300 flex items-center gap-2 shadow-[0_0_15px_rgba(0,255,136,0.05)]"
+              >
+                <Twitter className="w-4 h-4 text-emerald-400" />
+                <span>FOLLOW @Robinonhoodrh</span>
+              </a>
+
+              <a
+                href="https://t.me/robinonhoodrh"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-5 py-3.5 rounded-xl font-mono text-xs sm:text-sm font-bold bg-slate-900 border border-emerald-500/20 text-slate-300 hover:text-emerald-300 hover:border-emerald-400/50 hover:scale-105 transition-all duration-300 flex items-center gap-2 shadow-[0_0_15px_rgba(0,255,136,0.05)]"
+              >
+                <Send className="w-4 h-4 text-emerald-400 animate-pulse" />
+                <span>JOIN TELEGRAM</span>
+              </a>
 
               <button
                 onClick={onNavigateToFeatures}
